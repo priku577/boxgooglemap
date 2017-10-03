@@ -1,0 +1,14 @@
+Package: boxgooglemap
+Title: Boxi for lab5: google map api
+Version: 0.1
+Authors@R: person("Boxi", "Zhang", role = c("aut","cre"),email = "bossyzhang@gmail.com")
+Maintainer: Boxi Zhang <bossyzhang@gmail.com>
+Description: google map api.
+Depends: R (>= 3.2.0)
+Imports: httr
+Encoding: UTF-8
+LazyData: true
+License: GPL
+RoxygenNote: 6.0.1
+Suggests: knitr, rmarkdown, testthat
+VignetteBuilder: knitr
