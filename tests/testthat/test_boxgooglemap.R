@@ -1,6 +1,5 @@
 library(boxgooglemap)
 library(testthat)
-library(plyr)
 
 context("Coord lookup")
 
