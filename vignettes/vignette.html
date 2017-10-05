@@ -12,7 +12,7 @@
 
 <meta name="author" content="Boxi Zhang, Priya Pullolickal" />
 
-<meta name="date" content="2017-10-03" />
+<meta name="date" content="2017-10-05" />
 
 <title>boxgooglemap</title>
 
@@ -70,49 +70,50 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">boxgooglemap</h1>
 <h4 class="author"><em>Boxi Zhang, Priya Pullolickal</em></h4>
-<h4 class="date"><em>2017-10-03</em></h4>
+<h4 class="date"><em>2017-10-05</em></h4>
 
 
 
-<p>##Introduction The mapuloh package is connected with the google geocode API to provide with location and and coordination of the information provided using two main functions:</p>
+<p>The boxgooglemap package is connected with the google geocode API to convert location and coordination by two function:</p>
 <ul>
-<li>address_lookup</li>
-<li>coord_lookup</li>
+<li>address</li>
+<li>coord</li>
 </ul>
-<p>To use both functions, it is <strong>required to have the package httr installed</strong></p>
-<p>## Functions usage</p>
-<p>###addres_lookup</p>
-<p>address_lookup is a function that provides the user with the address of a given a set of coordinates The funtion uses the google geocode API to retrieve the result. The main parameter.</p>
-<p>The only input is <strong>latlong</strong>, a character string that includes the latitude and the longitude.</p>
-<p>The function returns a dataframe cointaining Full address names as well as the coordinates:</p>
+<p><strong>package httr is required to be installed</strong></p>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<div id="address" class="section level3">
+<h3>address</h3>
+<p>The ‘address’ function retrive the address of a given coordinate. The funtion uses the google geocode API to retrieve the result.</p>
+<p>The input <strong>latlong</strong> is a character string that includes the latitude and the longitude.</p>
+<p>The function returns a dataframe cointaining full address names as well as the coordinates:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(boxgooglemap)
-<span class="kw">head</span>(<span class="kw">address_lookup</span>(<span class="st">&quot;41.40450 2.17429&quot;</span>), <span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
-<pre><code>##                                       Full_address      lat      lng
-## 1 Carrer de la Marina, 255, 08025 Barcelona, Spain 41.40455 2.174106
-## 2         Sagrada Família, 08025 Barcelona, Spain 41.40450 2.174290
-## 3             La Sagrada Familia, Barcelona, Spain 41.40448 2.175728
-## 4                       Eixample, Barcelona, Spain 41.39184 2.164197
-## 5                                 Barcelona, Spain 41.38506 2.173404</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(<span class="kw">address_lookup</span>(<span class="st">&quot;24.83504 118.608&quot;</span>), <span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
-<pre><code>##                              Full_address      lat      lng
-## 3 China, Quanzhou Shi, Jinjiang Shi, 涵口 24.83491 118.6083
-## 4       Jinjiang, Quanzhou, Fujian, China 24.78168 118.5524
-## 5                 Quanzhou, Fujian, China 24.87413 118.6757
-## 6                           Fujian, China 26.48368 117.9249
-## 7                                   China 35.86166 104.1954</code></pre>
-<div id="coord_lookup" class="section level3">
-<h3>coord_lookup</h3>
-<p>The ‘coord_lookup’ function is a function that provides the user with the coordinates of a given address. The function uses the google geocode API to retrieve the result.</p>
-<p>The input needed is <strong>address</strong>, a character string that includes address components.</p>
+<span class="kw">head</span>(<span class="kw">address</span>(<span class="st">&quot;41.40450 76&quot;</span>), <span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>##                 Full_address        lat        lng
+## 1           A365, Kyrgyzstan 41.3874397 76.0098511
+## 2 Naryn District, Kyrgyzstan 41.5224188 75.8998674
+## 3   Naryn Region, Kyrgyzstan 41.2943227 75.3412179
+## 4                 Kyrgyzstan 41.2043800 74.7660980</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(<span class="kw">address</span>(<span class="st">&quot;67 115&quot;</span>), <span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>##                                  Full_address        lat         lng
+## 1              Sakha Republic, Russia, 678488 67.6288267 118.1269653
+## 2 Olenyoksky District, Sakha Republic, Russia 68.2270320 111.9293065
+## 3                      Sakha Republic, Russia 66.7613451 124.1237530
+## 4                                      Russia 61.5240100 105.3187560</code></pre>
+</div>
+<div id="coord" class="section level3">
+<h3>coord</h3>
+<p>The ‘coord’ function is a function that provides the user with the coordinates of a given address. The function uses the google geocode API to retrieve the result.</p>
+<p>Please input <strong>address</strong>, a character string that includes address components.</p>
 <p>If the address has partial match, different locations with their full names and coordinates will be retrieved as a dataframe:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(boxgooglemap)
-<span class="kw">coord_lookup</span>(<span class="st">&quot;Sagrada Familia, Barcelona&quot;</span>)</code></pre></div>
-<pre><code>##                                      Full_address      lat      lng
-## 1 Carrer de Mallorca, 401, 08013 Barcelona, Spain 41.40363 2.174356</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coord_lookup</span>(<span class="st">&quot;Mapuloh&quot;</span>)</code></pre></div>
-<pre><code>##                                     Full_address       lat      lng
-## 1 Mapulo, Bayan ng Taysan, Batangas, Philippines 13.733747 121.1854
-## 2 Mapulo, Malaybalay City, Bukidnon, Philippines  8.194049 125.2698</code></pre>
+<span class="kw">coord</span>(<span class="st">&quot;chang sha, china&quot;</span>)</code></pre></div>
+<pre><code>##             Full_address       lat        lng
+## 1 Changsha, Hunan, China 28.228209 112.938814</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coord</span>(<span class="st">&quot;milan&quot;</span>)</code></pre></div>
+<pre><code>##                               Full_address        lat      lng
+## 1 Milan, Metropolitan City of Milan, Italy 45.4642035 9.189982</code></pre>
+</div>
 </div>
 
 

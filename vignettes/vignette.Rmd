@@ -10,42 +10,41 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
- ##Introduction
-  The mapuloh package is connected with the google geocode API to provide with location and and coordination of the information provided using two main functions: 
+The boxgooglemap package is connected with the google geocode API to convert location and coordination by two function:
   
   
-  - address_lookup
-- coord_lookup
+- address
+- coord
 
-To use both functions, it is **required to have the package httr installed** 
+**package httr is required to be installed** 
   
-  ## Functions usage
-  
-  ###addres_lookup
-  
-  address_lookup is a function that provides the user with the address of a given a set of coordinates The funtion uses the google geocode API to retrieve the result. The main parameter. 
+##Functions
 
-The only input is **latlong**, a character string that includes the latitude and the longitude.
+###address
+  
+The 'address' function retrive the address of a given coordinate. The funtion uses the google geocode API to retrieve the result.
 
-The function returns a dataframe cointaining Full address names as well as the coordinates:
+The input **latlong** is a character string that includes the latitude and the longitude.
+
+The function returns a dataframe cointaining full address names as well as the coordinates:
 
 ```{r, fig.show='hold', message=FALSE}
 library(boxgooglemap)
-head(address_lookup("41.40450 2.17429"), n = 5)
-tail(address_lookup("24.83504 118.608"), n = 5)
+head(address("41.40450 76"), n = 5)
+tail(address("67 115"), n = 5)
 
 ```
 
 
-###coord_lookup
-The 'coord_lookup' function is a function that provides the user with the coordinates of a given address. The function uses the google geocode API to retrieve the result.
+###coord
+The 'coord' function is a function that provides the user with the coordinates of a given address. The function uses the google geocode API to retrieve the result.
 
-The input needed is **address**, a character string that includes address components.
+Please input **address**, a character string that includes address components.
 
-If the address has partial match, different locations with their full names and  coordinates will be retrieved as a dataframe:
+If the address has partial match, different locations with their full names and coordinates will be retrieved as a dataframe:
 ```{r, fig.show='hold', message=FALSE}
 library(boxgooglemap)
-coord_lookup("Sagrada Familia, Barcelona")
+coord("chang sha, china")
 
-coord_lookup("Mapuloh")
+coord("milan")
 ```

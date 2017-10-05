@@ -8,33 +8,30 @@ NULL
 
 
 
-#' @title Address finder
+#' @title address
 #'
-#' @description The 'address_lookup' function is a function that provides the user the address of a given
-#' a set of coordinates The funtion uses the google geocode API to retrieve the result.
+#' @description The 'address' function is a function that convert the coordinates to address.
 #'
-#' @param latlong A character string that includes the latitude and the longitude.
+#' @param latlong A character string.
 #'
-#' @return A dataframe cointaining Full address names as well as the coordinates
+#' @return A dataframe cointaining full address information
 #'
 #' @examples
-#' address_lookup(latlong = "58.39701, 15.57415")
+#' address(latlong = "58.39701, 15.57415")
 #'
 #' @export
-address_lookup <- function(latlong = NULL){
+address <- function(latlong = NULL){
 
   #Intial
   if(is.null(latlong) | !is.character(latlong)){
-    stop("Use character values")
+    stop("input should be character")
   }
 
   if(!grepl("[[:digit:]]|[[:punct:]]",latlong)){
-    stop("Use digits")
+    stop("input should be digits")
   }
 
-  #Creating query and using GET verb
-
-  cleaner <- function(x){
+grab <- function(x){
 
     x <- gsub("([[:space:]]|[[:punct:]])\\1+", "\\1", x)
     x <- gsub("[[:space:]]|[^[:alnum:],.+-]",",",x)
@@ -42,19 +39,18 @@ address_lookup <- function(latlong = NULL){
     return(x)
   }
 
-  latlong <- cleaner(latlong)
+  latlong <- grab(latlong)
   url <- "https://maps.googleapis.com/maps/api/geocode/json?latlng="
-  key <- "&key=AIzaSyCcRPdN_sAcwiovz7EPAq31l5cFIxp-aW4"
+  key <- "&key=AIzaSyCnjsC4BPd2_cEQof7cG7NLpO0wTlxCEqw"
   url <- paste0(url,latlong,key)
   get_res <- httr::GET(url)
 
-  #Checking for status code
 
 
   if(!grepl("^2",httr::status_code(get_res))){
     stop(httr::message_for_status(get_res))
   } else {
-    #Handlig result and returning
+
     content_res <- httr::content(get_res)
     geometry_res <- lapply(content_res[["results"]], "[[", "geometry")
     coord <- as.data.frame(t(sapply(geometry_res, "[[", "location")))
