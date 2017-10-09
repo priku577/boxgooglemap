@@ -13,7 +13,7 @@ test_that("Overall test",{
           expect_that(coord(address = "ryds alle 1,linkoping"),
                       equals(coord(address = "ryds alle 1")))
           expect_that(coord(address = "linkoping university"),
-                      equals(coord(address="581 83 Linköping, Sweden")))
+                      equals(coord(address="581 83 Linköping, Sweden")[1,]))
 })
 
 context("Address")
